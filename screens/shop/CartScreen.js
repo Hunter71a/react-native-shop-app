@@ -36,7 +36,7 @@ const CartScreen = props => {
           title="Order Now"
           disabled={cartItems.length === 0}
           onPress={() =>{
-            dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
+            dispatch(orderActions.addOrder(cartItems, cartTotalAmount));
           }}
         />
       </View>
@@ -56,6 +56,10 @@ const CartScreen = props => {
       />
     </View>
   );
+};
+
+CartScreen.navigationOptions = {
+  headerTitle: 'Your Cart'
 };
 
 
