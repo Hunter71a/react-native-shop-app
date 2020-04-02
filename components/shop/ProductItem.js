@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform } from 'react-native';
 
+import Card from '../UI/Card';
 
 const ProductItem = props => {
   let TouchableComponent = TouchableOpacity;
@@ -9,48 +10,38 @@ const ProductItem = props => {
     TouchableComponent = TouchableNativeFeedback;
   }
   return (
-
-    <View style={styles.product}>
+    <Card style={styles.product}>
       <View style={styles.touchable}>
         <TouchableComponent onPress={props.onSelect} useForeground>
           <View>
-          <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{ uri: props.image }} />
-          </View>
-          <View style={styles.details}>
-            <Text style={styles.title}>{props.title}</Text>
-            <Text style={styles.price}>${props.price.toFixed(2)}</Text>
-          </View>
-
-          <View style={styles.action}>
-            {props.children}
-            {/* <Button color={Colors.primary} title="View Details" onPress={props.onViewDetail} />
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{ uri: props.image }} />
+            </View>
+            <View style={styles.details}>
+              <Text style={styles.title}>{props.title}</Text>
+              <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+            </View>
+            <View style={styles.action}>
+              {props.children}
+              {/* <Button color={Colors.primary} title="View Details" onPress={props.onViewDetail} />
             <Button color={Colors.primary} title="Add To Cart" onPress={props.onAddToCart} /> */}
-          </View>
+            </View>
           </View>
         </TouchableComponent>
       </View>
-    </View>
+    </Card>
   );
 };
 
+
 const styles = StyleSheet.create({
   product: {
-    shadowColor: 'black',
-    shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 5,
-    borderRadius: 10,
-    backgroundColor: 'white',
     height: 300,
-    margin: 20,
-   
+    margin: 20
   },
   touchable: {
     borderRadius: 10,
     overflow: 'hidden'
-
   },
   image: {
     width: '100%',

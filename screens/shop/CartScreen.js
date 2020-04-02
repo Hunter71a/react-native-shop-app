@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Card from '../../components/UI/Card';
 import CartItem from '../../components/shop/CartItem';
 import Colors from '../../constants/Colors';
 import * as cartActions from '../../store/actions/cart';
@@ -27,7 +28,7 @@ const CartScreen = props => {
   const dispatch = useDispatch();
   return (
     <View style={styles.screen}>
-      <View style={styles.summary}>
+      <Card style={styles.summary}>
         <Text style={styles.summaryText}>
           Total: <Text style={styles.amount}>${Math.round(cartTotalAmount.toFixed(2) * 100) / 100}</Text>
         </Text>
@@ -39,7 +40,7 @@ const CartScreen = props => {
             dispatch(orderActions.addOrder(cartItems, cartTotalAmount));
           }}
         />
-      </View>
+      </Card>
       <FlatList
         data={cartItems}
         keyExtractor={item => item.productId}
@@ -63,29 +64,20 @@ CartScreen.navigationOptions = {
   headerTitle: 'Your Cart'
 };
 
-
 const styles = StyleSheet.create({
   screen: {
-    margin: 20,
+    margin: 20
   },
   summary: {
-    shadowColor: 'black',
-    shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 5,
-    borderRadius: 10,
-    backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
-    padding: 10,
+    padding: 10
   },
   summaryText: {
     fontFamily: 'open-sans-bold',
-    fontSize: 18,
-
+    fontSize: 18
   },
   amount: {
     color: Colors.primary
