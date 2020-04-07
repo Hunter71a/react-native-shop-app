@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
         action.productData.title,
         action.productData.imageUrl,
         action.productData.description,
-        state.userProducts[productIndex].price,
+        state.userProducts[productIndex].price
       );
       const updatedUserProducts = [...state.userProducts];
       updatedUserProducts[productIndex] = updatedProduct;
