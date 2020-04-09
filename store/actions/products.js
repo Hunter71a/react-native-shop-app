@@ -8,27 +8,37 @@ import Product from '../../models/product';
 export const fetchProducts = () => {
   return async dispatch => {
     // add any async code you want!
-    const response = await fetch(
-      'https://rn-store-app.firebaseio.com/products.json'
-    );
-
-    const resData = await response.json();
-    const loadedProducts = [];
-
-    for (const key in resData) {
-      loadedProducts.push(
-        new Product(
-          key,
-          'u1',
-          resData[key].title,
-          resData[key].imageUrl,
-          resData[key].description,
-          resData[key].price
-        )
+    try {
+      const response = await fetch(
+        'https://rn-store-app.firebaseio.com/products.json'
       );
+
+        if (!response.ok) {
+          throw new Error('Something went wrong!');
+        }
+
+
+      const resData = await response.json();
+      const loadedProducts = [];
+
+      for (const key in resData) {
+        loadedProducts.push(
+          new Product(
+            key,
+            'u1',
+            resData[key].title,
+            resData[key].imageUrl,
+            resData[key].description,
+            resData[key].price
+          )
+        );
+      }
+      console.log(resData);
+      dispatch({ type: SET_PRODUCTS, products: loadedProducts });
+    } catch (err) {
+      // send to custom analytics server
+      throw err;
     }
-    console.log(resData);
-    dispatch({ type: SET_PRODUCTS, products: loadedProducts });
   };
 };
 
